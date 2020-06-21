@@ -4,6 +4,11 @@
 # $2=number of partitions
 # $3=dir to place partitions 
 
+if [ $# -lt 3 ] ; then
+	echo "Usage: ./script.sh file_name number_of_partitions dir_to_place_partitions"
+	exit 1
+fi
+
 mkdir $3 && cp $1 ./$3/tmp_source_file && cd $3
 HEADER_COLUMNS=$(head -n 1 tmp_source_file)
 echo "$(sed "1d" tmp_source_file)" > tmp_source_file 
@@ -15,4 +20,3 @@ for filename in ./*
 do 
 	echo "$(echo $HEADER_COLUMNS | cat - $filename)" > $filename
 done 	
-
